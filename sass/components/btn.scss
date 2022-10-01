@@ -1,0 +1,23 @@
+.btn {
+    font-size: rem(16px);
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: rem(21px) rem(41px);
+    border-radius: rem(100px);
+    line-height: 1;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+
+    &--theme--transparent {
+        background: transparent;
+        color: #fff;
+        text-transform: none;
+        margin-top: rem(20px);
+    }
+
+    &--theme--yellow {
+        background: $yellow;
+        color: #000;
+    }
+}

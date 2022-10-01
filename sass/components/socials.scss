@@ -1,0 +1,18 @@
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style-type: none;
+
+    &__link {
+        text-decoration: none;
+        display: block;
+    }
+
+    &__icon{
+        fill: #b3b3b3;
+        height: rem(20px);
+        width: rem(20px);
+        margin-right: rem(7px);
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "surfboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "sass --watch ./sass/main.scss ./css/style.css"
+  },
+  "author": "Nikolay Sibekin",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.1",
+    "normalize.css": "^8.0.1",
+    "sass": "^1.55.0"
+  }
+}

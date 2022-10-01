@@ -1,0 +1,11 @@
+.order-section {
+    background: url("../../img/bg/bg_form.png") center center, rgba(#000, .8);
+    background-size: cover;
+    color: #fff;
+    text-shadow: rem(1px) rem(1px) rem(1px) black;
+    height: rem(652px);
+
+    @include tablets {
+        height: rem(966px);
+    }
+}

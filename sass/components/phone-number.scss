@@ -1,0 +1,17 @@
+.phone-number {
+    font-size: rem(22px);
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+
+    &__icon {
+        flex-shrink: 0;
+    }
+
+    &__icon-elem {
+        width: rem(13px);
+        height: rem(14px);
+        margin-right: rem(6px);
+    }
+}

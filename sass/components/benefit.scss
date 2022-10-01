@@ -1,0 +1,48 @@
+.benefit {
+    text-align: center;
+
+    @include phones {
+        display: flex;
+        text-align: left;
+    }
+
+    &__image-wrapper {
+        display: inline-block;
+        width: rem(128px);
+        height: rem(128px);
+        position: relative;
+        background: #f2f5f4;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: rem(20px);
+    }
+    
+    &__icon {
+        width: rem(68px);
+        height: rem(68px);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__title {
+        font-size: rem(27px);
+        font-weight: 700;
+        margin-bottom: rem(19px);
+        color: #292929;
+    }
+
+    &__image {
+        margin-bottom: rem(19px);
+    
+        @include phones {
+            margin-bottom: 0;
+            margin-right: rem(20px);
+        }
+    }
+
+    &__desc {
+        font-weight: 300;
+    }
+}

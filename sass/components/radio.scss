@@ -1,0 +1,59 @@
+.radio {
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+    margin-right: rem(22px);
+
+    @include phones {
+        margin-bottom: rem(10px);
+    }
+
+    &--checkbox {
+        .radio__visible {
+            border-radius: 0;
+
+            &:before {
+                background: url("../../img/decor/checkmark.png")  center no-repeat;
+            }
+        }
+    }
+
+    &__elem {
+        display: none;
+        margin-right: rem(10px);
+    
+        &:checked ~ .radio__visible {
+            &::before {
+                display: block;
+            }
+        }
+    }
+
+    &.radio__visible {
+        width: rem(28px);
+        height: rem(28px);
+        position: relative;
+        border-radius: 50%;
+        background: #fff;
+        margin-right: rem(10px);
+        margin-bottom: rem(16px);
+    
+        &:before {
+            content: "";
+            width: rem(14px);
+            height: rem(14px);
+            background: #fedb3f;
+            border-radius: 50%;
+            position: absolute;
+            display: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &__title {
+        margin-right: rem(8px);
+    }
+}
