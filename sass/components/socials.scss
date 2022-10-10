@@ -13,6 +13,10 @@
         fill: #b3b3b3;
         height: rem(20px);
         width: rem(20px);
-        margin-right: rem(7px);
+        margin-right: rem(14px);
+
+        &:hover {
+            fill: #000;
+        }
     }
 }

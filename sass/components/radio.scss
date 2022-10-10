@@ -14,7 +14,7 @@
             border-radius: 0;
 
             &:before {
-                background: url("../../img/decor/checkmark.png")  center no-repeat;
+                background: url("./../../img/decor/checkmark.png")  center no-repeat;
             }
         }
     }
@@ -30,7 +30,7 @@
         }
     }
 
-    &.radio__visible {
+    &__visible {
         width: rem(28px);
         height: rem(28px);
         position: relative;

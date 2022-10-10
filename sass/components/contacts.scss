@@ -1,8 +1,12 @@
 .contacts {
-    font-style: 400;
-    font-size: rem(21px);
-    color: #292929;
-    text-decoration: none;
+    &__place {
+        font-size: rem(21px);
+        font-weight: 400;
+        color: #292929;
+        text-decoration: none;
+        font-style: normal;
+        line-height: rem(24px);
+    }
 
     @include phones {
         margin-bottom: 10px;

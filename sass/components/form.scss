@@ -46,11 +46,11 @@
         }
     
         &--active {
-            border-color: #fedb3f;
+            border-color: $yellow;
         }
     
         &:focus {
-            border-color: #fedb3f;
+            border-color: $yellow;
             outline: none;
         }
     }
@@ -68,4 +68,12 @@
         display: flex;
         justify-content: center;
     }
+}
+
+.error .form__input {
+    border: 1px solid #ff0000;
+}
+
+.error {
+    color: #ff0000;
 }

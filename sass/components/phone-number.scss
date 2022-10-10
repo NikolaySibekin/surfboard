@@ -1,6 +1,5 @@
 .phone-number {
-    font-size: rem(22px);
-    font-weight: 700;
+    font-style: normal;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -10,8 +9,23 @@
     }
 
     &__icon-elem {
+        fill: #000;
         width: rem(13px);
-        height: rem(14px);
-        margin-right: rem(6px);
+        height: rem(15px);
+        margin-right: rem(7px);
+
+        &--white {
+            fill: #fff;
+        }
+    }
+
+    &__text {
+        font-size: rem(21px);
+        font-weight: 400;
+        color: #292929;
+
+        &--white {
+            color: #fff;
+        }
     }
 }

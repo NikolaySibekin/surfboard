@@ -6,6 +6,15 @@
         text-align: left;
     }
 
+    &__image {
+        margin-bottom: rem(19px);
+    
+        @include phones {
+            margin-bottom: 0;
+            margin-right: rem(20px);
+        }
+    }
+
     &__image-wrapper {
         display: inline-block;
         width: rem(128px);
@@ -18,6 +27,7 @@
     }
     
     &__icon {
+        fill: #000;
         width: rem(68px);
         height: rem(68px);
         position: absolute;
@@ -25,21 +35,12 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
+    
     &__title {
         font-size: rem(27px);
         font-weight: 700;
         margin-bottom: rem(19px);
         color: #292929;
-    }
-
-    &__image {
-        margin-bottom: rem(19px);
-    
-        @include phones {
-            margin-bottom: 0;
-            margin-right: rem(20px);
-        }
     }
 
     &__desc {

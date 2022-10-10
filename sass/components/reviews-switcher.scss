@@ -1,0 +1,40 @@
+.reviews-switcher {
+    display: flex;
+    justify-content: center;
+
+    &__item {
+        width: rem(74px);
+        height: rem(74px);
+        border: rem(6px) solid transparent;
+        margin-right: rem(6px);
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+    
+        &--active {
+            border-color: #fedb3f;
+        }
+    
+    
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    
+    &__link {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: block;
+    }
+    
+    &__img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+    }
+}

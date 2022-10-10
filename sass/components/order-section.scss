@@ -3,7 +3,8 @@
     background-size: cover;
     color: #fff;
     text-shadow: rem(1px) rem(1px) rem(1px) black;
-    height: rem(652px);
+    height: 100vh;
+    min-height: rem(650px);
 
     @include tablets {
         height: rem(966px);

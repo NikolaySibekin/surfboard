@@ -3,6 +3,14 @@
     align-items: center;
     justify-content: space-between;
     padding-top: rem(28px);
+
+    &__phone-number {
+        font-size: rem(22px);
+        font-weight: 700;
+        line-height: rem(18px);
+        color: #fff;
+    }
+
 }
 
 .phone-number.header__phone-number {

@@ -4,6 +4,9 @@
         padding: rem(42px) rem(42px);
         margin-bottom: rem(15px);
         width: rem(940px);
+        height: rem(348px);
+        overflow: hidden;
+        position: relative;
         
         @include tablets {
             width: rem(724px);
@@ -11,13 +14,36 @@
         }
     }
 
+    &__list {
+        position: relative;
+        min-height: rem(348px);
+    }
+
     &__display-inner {
         display: flex;
-    
+        width: 100%;
+        height: rem(348px);
+
         @include tablets {
             flex-direction: column;
             text-align: center;
             align-items: center;
+        }
+    }
+
+    &__item {
+        width: rem(940px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: .3s;
+        opacity: 0;
+
+        &--active{
+            position: static;
+            opacity: 1;
         }
     }
 
@@ -42,6 +68,7 @@
 
     &__content {
         flex: 1;
+        height: rem(264px);
     }
 
     &__title {
@@ -54,6 +81,7 @@
     &__text {
         font-weight: 400;
         margin-bottom: rem(25px);
+        width: rem(463px);
     }
 
     &__author {
@@ -66,3 +94,4 @@
         justify-content: center;
     }
 }
+
