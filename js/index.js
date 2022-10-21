@@ -70,73 +70,99 @@ const slider = new Slider('#slider', {
 
 slider.init();
 
-/*Горизонтальный аккордион */
+/* Вертикальный аккордион */
 
-// let teamAccoJS = () => {
-//     const team = document.querySelector(".team-accordion"); 
+const openTeamItem = (item) => {
+    const container = item.closest(".team__item");
+    const contentBlock = container.find(".team__content");
+    const textBlock = contentBlock.find(".team__content-block");
+    const reqHeight = textBlock.height();
 
-//     team.addEventListener('click', function(e) {
-//         e.preventDefault();
-//         const link = e.target; //ссылка на которую нажали
-//         console.log(link);
-
-//         if (link.classList.contains('.team-accordion__link')) {
-//             const activeItem = team.querySelector(".team-accordion__details--active");
-//             console.log(activeItem);
-
-//             if (activeItem) { //всегда закрывает активный элемент
-//                 let activeText = activeItem.querySelector('.team-accordion__details');
-//                 activeText.style.height = "0";
-//                 activeItem.classList.remove("team-accordion__details--active");
-
-//             }
-
-//             if (!activeItem || activeItem.querySelector(".team-accordion__link") !== link) {
-//                 let currentElement = link.closest(".team-accordion__item");
-//                 currentElement.classList.add("team-accordion__details--active");
-//                 let currentText = currentElement.querySelector(".team-accordion__details");
-//                 console.log(currentText);
-//                 currentText.style.height = 100 + "px";
-//             }
-//         }
-//     });
-// };
-
-/*Горизонтальный аккордион  костыль*/
-let teamAccoJS = () => {
-    const teamList = document.querySelector(".team-accordion");
-
-    teamList.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        const target = e.target;
-
-        const items = document.querySelectorAll(".team-accordion__item");
-
-        if (target.classList.contains('team-accordion__link')) {
-            const item = target.closest(".team-accordion__details");
-            if (!item.classList.contains("team-accordion__details--active")) {
-                items.forEach(function(currentItem) {
-                    currentItem.classList.remove("team-accordion__details--active");
-                })
-                item.classList.add("team-accordion__details--active");
-            } else {
-                item.classList.remove("team-accordion__details--active");
-            }
-        }
-    });
+    container.addClass("team__content--active");
+    contentBlock.height(reqHeight);
 };
 
-teamAccoJS();
+const closeEveryItem = (container) => {
+    const items = container.find('.team__content');
+    const itemContainer = container.find(".team__item");
 
-// $(".team-accordion__link").click((e) => {
-//     e.preventDefault();
+    itemContainer.removeClass("team__content--active");
+    items.height(0);
+}
 
-//     const $this = $(e.currentTarget);
-//     const curBlock = $this.closest(".team-accordion__details");
+$('.team__title').click(e => {
+    const $this = $(e.currentTarget);
+    const container = $this.closest('.team');
+    const elemContainer = $this.closest('.team__item');
 
-//     curBlock.addClass("team-accordion__details--active").siblings().removeClass("team-accordion__details--active");
-// });
+    if (elemContainer.hasClass("team__content--active")) {
+        closeEveryItem(container);
+    } else {
+        closeEveryItem(container);
+        openTeamItem($this);
+    }
+}); 
+
+/* Горизонтальный аккордион */
+const mesureWidth = item => {
+    let reqItemWidth = 0;
+
+    const screenWidth = $(window).width();
+    const container = item.closest(".products-menu");
+    const titlesBlocks = container.find(".products-menu__title");
+    const titlesWidth = titlesBlocks.width() * titlesBlocks.length;
+
+    const textContainer = item.find(".products-menu__container");
+    const paddingLeft = parseInt(textContainer.css("padding-left"));
+    const paddingRight = parseInt(textContainer.css("padding-right"));
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    if (isMobile) {
+        reqItemWidth = screenWidth - titlesWidth;
+    } else {
+        reqItemWidth = 524;
+    }
+
+    return {
+        container: reqItemWidth,
+        textContainer: reqItemWidth - paddingLeft - paddingRight
+    }
+};
+
+const closeEveryItemInContainer = container => {
+    const items = container.find(".products-menu__item");
+    const content = container.find(".products-menu__content");
+
+    items.removeClass("active");
+    content.width(0);
+}
+
+const openItem = item => {
+    const hiddenContent = item.find(".products-menu__content");
+    const reqWidth = mesureWidth(item);
+    const textBlock = item.find(".products-menu__container");
+
+    item.addClass("active");
+    hiddenContent.width(reqWidth.container);
+    textBlock.width(reqWidth.textContainer);
+}
+
+$(".products-menu__title").on("click", e => {
+    e.preventDefault();
+
+    const $this = $(e.currentTarget);
+    const item = $this.closest(".products-menu__item");
+    const itemOpened = item.hasClass("active");
+    const container = $this.closest(".products-menu");
+
+    if (itemOpened) {
+        closeEveryItemInContainer(container);
+    } else {
+        closeEveryItemInContainer(container);
+        openItem(item);
+    }
+});
 
 /* Отправка формы */
 class AjaxForm{
@@ -309,3 +335,291 @@ $(".reviews-switcher__link").click((e) => {
     itemToShow.addClass("reviews__item--active").siblings().removeClass("reviews__item--active");
     curItem.addClass("reviews-switcher__item--active").siblings().removeClass("reviews-switcher__item--active");
 });
+
+/* Плеер */
+
+let player;
+const playerContainer = $('.player');
+
+let eventsInit = () => {
+    $(".player__start").click(e => {
+        e.preventDefault();
+
+        if (playerContainer.hasClass("paused")) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    });
+
+    $(".player__playback").click(e => {
+        const bar = $(e.currentTarget);
+        const clickedPosition = e.originalEvent.layerX;
+        const newButtonPositionPercent = (clickedPosition / bar.width()) * 100;
+        const newPlaybackPositionSec = (player.getDuration() / 100) * newButtonPositionPercent;
+
+        $(".player__playback-button").css({
+            left: `${newButtonPositionPercent}%`
+        });
+
+        player.seekTo(newPlaybackPositionSec);
+    });
+
+    $(".player__splash").click(e => {
+        player.playVideo();
+    });
+};
+
+const formatTime = timeSec => {
+    const roundTime = Math.round(timeSec);
+
+    const minutes = addZero(Math.floor(roundTime / 60));
+    const seconds = addZero(roundTime - minutes * 60);
+    
+    function addZero(num) {
+        return num < 10 ? `0${num}` : num;
+    }
+
+    return `${minutes} : ${seconds}`;
+};
+
+const onPlayerReady = () => {
+    let interval;
+    const durationSec = player.getDuration();
+
+    $(".player__duration-estimate").text(formatTime(durationSec));
+
+    if (typeof interval !== 'undefined') {
+        clearInterval(interval);
+    }
+
+    interval = setInterval(() => {
+        const completedSec = player.getCurrentTime();
+        const completedPercent = (completedSec / durationSec) * 100;
+
+        $(".player__playback-button").css({
+            left: `${completedPercent}%`
+        });
+
+        $(".player__duration-completed").text(formatTime(completedSec));
+    }, 1000);
+};
+
+const onPlayerStateChange = event => {
+    switch (event.data) {
+        case 1:
+            playerContainer.addClass('active');
+            playerContainer.addClass('paused');
+            break;
+        case 2:
+            playerContainer.removeClass('active');
+            playerContainer.removeClass('paused');
+            break;
+    }
+};
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player("yt-player", {
+        height: "392",
+        width: "662",
+        videoID: "U4RDCKR4fLE", 
+        events: {
+            onReady: onPlayerReady, 
+            onStateChange: onPlayerStateChange
+        },
+        playerVars: {
+            controls: 0,
+            disablekb: 0,
+            showinfo: 0,
+            rel: 0,
+            autoplay: 0,
+            modestbranding: 0
+        }
+    });
+}
+
+eventsInit();
+
+/* Интерактивная карта */
+
+let myMap;
+
+const init = () => {
+    myMap = new ymaps.Map("map", {
+        center: [55.749331, 37.603365],
+        zoom: 15,
+        controls: []
+    });
+
+    const coords = [
+        [55.749331, 37.603365],
+    ];
+
+    const myCollection = new ymaps.GeoObjectCollection({}, {
+        draggable: false,
+        iconLayout: 'default#image',
+        iconImageHref: "./img/decor/point.svg",
+        iconImageSize: [58, 73],
+        iconImageOffset: [-35, -52]
+    });
+
+    coords.forEach(coord => {
+        myCollection.add(new ymaps.Placemark(coord));
+    });
+
+    myMap.geoObjects.add(myCollection);
+
+    myMap.behaviors.disable('scrollZoom');
+}
+
+ymaps.ready(init);
+
+/* ops */
+const sections = $("section");
+const display = $(".maincontent");
+const sideMenu = $(".fixed-menu");
+const menuItems = sideMenu.find(".fixed-menu__item");
+
+const mobileDetect = new MobileDetect(window.navigator.userAgent);
+const isMobile = mobileDetect.mobile();
+
+let inScroll = false;
+
+sections.first().addClass("active");
+
+const countSectionPosition = (sectionEq) => {
+    const position = sectionEq * -100;
+    
+    if (isNaN(position)) {
+        console.error("передано не верное значение в countSectionPosition");
+        return 0;
+    }
+
+    return position;
+};
+
+const changeMenuThemeForSection = (sectionEq) => {
+    const currentSection = sections.eq(sectionEq);
+    const menuTheme = currentSection.attr("data-sidemenu-theme");
+    const activeClass = "fixed-menu--shadowed";
+
+    if (menuTheme == "black") {
+        sideMenu.addClass(activeClass);
+    } else {
+        sideMenu.removeClass(activeClass);
+    }
+};
+
+const resetActiveClassRorItem = (items, itemEq, activeClass) => {
+     items.eq(itemEq).addClass(activeClass).siblings().removeClass(activeClass);
+};
+
+const performTransition = (sectionEq) => {
+    if (inScroll) return; 
+
+    const transitionOver = 1000;
+    const mouseInertiaOver = 300;
+
+    inScroll = true;
+
+    const position = countSectionPosition(sectionEq);
+
+    changeMenuThemeForSection(sectionEq);
+
+    display.css({
+        transform: `traslateY(${position}%)`,
+    });
+
+    resetActiveClassRorItem(sections, sectionEq, "active");
+
+    setTimeout(() => {
+        inScroll = false;
+
+        resetActiveClassRorItem(menuItems, sectionEq, "fixed-menu__item--active");
+
+    }, transitionOver + mouseInertiaOver);
+};
+
+const viewportScroller = () => {
+    const activeSection = sections.filter(".active");
+    const nextSection = activeSection.next();
+    const prevSection = activeSection.prev();
+
+    return {
+        next() {
+            if (nextSection.lenght) {
+                performTransition(nextSection.index());
+            }
+        },
+        prev() {
+            if (prevSection.lenght) {
+                performTransition(prevSection.index());
+            }
+        },
+    };
+};
+
+$(window).on("wheel", (e) => {
+    const deltaY = e.originalEvent.deltaY;
+    const scroller = viewportScroller();
+
+    if (deltaY > 0) {
+        scroller.next();
+    }
+
+    if (deltaY < 0) {
+        scroller.prev();
+    }
+});
+
+$(window).on("keydown", (e) => {
+    const tagName = e.target.tagName.toLowerCase();
+    const userTypingInInputs = tagName == "input" || tagName == "textarea";
+    const scroller = viewportScroller();
+
+    if (userTypingInInputs) return;
+
+    switch (e.keyCode) {
+        case 38:
+            scroller.next();
+            break;
+    
+        case 40:
+            scroller.prev();
+            break;
+    }
+});
+
+$(".wrapper").on("touchmove", (e) => e.preventDefault());
+
+$("[data-scroll-to]").click((e) => {
+    e.preventDefault();
+
+    const $this = $(e.currentTarget);
+    const target = $this.attr("data-scroll-to");
+    const reqSection = $(`[data-section-id=${target}]`);
+
+    performTransition(reqSection.index());
+});
+
+// https://hgoebl.github.io/mobile-detect.js/doc/MobileDetect.html
+
+if (isMobile) {
+    // https://github.com/mattbryson/TouchSwipe-Jquery-Plugin
+    $("body").swipe({
+        swipe: function (event, direction) {
+            const scroller = viewportScroller();
+            let scrollDirection = "";
+            
+            if (direction == 'up') scrollDirection = "next";
+            if (direction == 'down') scrollDirection = "prev";
+    
+            scroller[scrollDirection]();
+        },
+    });
+};
+
+
+
+
+

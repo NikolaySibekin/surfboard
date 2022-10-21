@@ -1,0 +1,14 @@
+.products-menu-section {
+    background: url("../../img/bg/slider.png") center center, rgba(#1968B1, .8);
+    background-size: cover;
+    position: relative;
+    color: #fff;
+    height: 100vh;
+
+    &__title {
+        color: #fff;
+        position: absolute;
+        top: rem(109px);
+        left: rem(84px);
+    }
+}

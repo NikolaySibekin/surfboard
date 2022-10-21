@@ -1,3 +1,95 @@
 .team {
-    
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+
+    &__wrapper {
+        max-height: 100vh;
+    }
+
+    &--version--mobile {
+        display: none;
+    }
+
+    &__item {
+        flex: 1;
+        position: relative;
+        margin-right: rem(20px);
+        max-width: 220px;
+        text-align: center;
+        height: 454px;
+    }
+
+    &__member {
+        height: rem(288px);
+    }
+
+    &__photo {
+        width: 100%;
+        max-width: 220px;
+        margin-right: rem(20px);
+
+        @include tablets {
+            margin-bottom: 15px;
+        }
+    }
+
+    &__title {
+        font-size: rem(20px);
+        font-weight: 700;
+        line-height: rem(26px);
+        padding: 0;
+        color: #292929;
+        margin-top: rem(21px);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background-color: #fff;
+
+        &::after {
+            content: url("./../../img/decor/poligon.png");
+            margin-left: 4px;
+            margin-bottom: 6px;
+            height: 26px;
+        }
+    }
+
+    // &--version--desktop .team__content {
+    //     position: absolute;
+    //     top: 100%;
+    // }
+
+    &__content {
+        overflow: hidden;
+        transition: hight .3s;
+        height: 0;
+
+        &--active{
+            height: 118px;
+        }
+    }
+
+    &__content-block {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        height: 118px;
+    }
+
+    &__occ {
+        font-size: rem(18px);
+        font-weight: 400;
+        line-height: rem(22px);
+        color: #292929;
+        margin-top: rem(8px);
+    }
+
+    &__desc {
+        font-size: rem(17px);
+        font-weight: 300;
+        line-height: rem(22px);
+        color: #666666;
+        margin-top: rem(4px);
+    }
 }
