@@ -352,7 +352,7 @@ img {
   }
 }
 .benefits__item:before {
-  content: url("../../img/decor/shape.png");
+  content: url("../img/decor/shape.png");
   position: absolute;
   top: 1.6666666667rem;
   right: 0;
@@ -439,10 +439,10 @@ img {
   background-color: transparent;
 }
 .products__slide-arrow--left {
-  background-image: url("./../../img/decor/left.png");
+  background-image: url("../img/decor/left.png");
 }
 .products__slide-arrow--right {
-  background-image: url("./../../img/decor/right.png");
+  background-image: url("../img/decor/right.png");
 }
 .products__list {
   display: flex;
@@ -592,7 +592,7 @@ img {
   background-color: #fff;
 }
 .team__title::after {
-  content: url("./../../img/decor/poligon.png");
+  content: url("../img/decor/poligon.png");
   margin-left: 4px;
   margin-bottom: 6px;
   height: 26px;
@@ -627,7 +627,7 @@ img {
 }
 
 .products-menu-section {
-  background: url("../../img/bg/slider.png") center center, rgba(25, 104, 177, 0.8);
+  background: url("../img/bg/slider.png") center center, rgba(25, 104, 177, 0.8);
   background-size: cover;
   position: relative;
   color: #fff;
@@ -829,7 +829,7 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("./../../img/bg/bg_player.png") center center no-repeat;
+  background: url("../img/bg/bg_player.png") center center no-repeat;
   background-size: cover;
   cursor: pointer;
 }
@@ -868,7 +868,7 @@ img {
   width: 11px;
   height: 16px;
   border: none;
-  background: url("./../../img/decor/start.svg") center center no-repeat;
+  background: url("../img/decor/start.svg") center center no-repeat;
   background-size: cover;
   color: #fff;
   cursor: pointer;
@@ -964,7 +964,7 @@ img {
 }
 
 .order-section {
-  background: url("../../img/bg/bg_form.png") center center, rgba(0, 0, 0, 0.8);
+  background: url("../img/bg/bg_form.png") center center, rgba(0, 0, 0, 0.8);
   background-size: cover;
   color: #fff;
   text-shadow: 0.0555555556rem 0.0555555556rem 0.0555555556rem black;
@@ -993,7 +993,7 @@ img {
   border-radius: 0;
 }
 .radio--checkbox .radio__visible:before {
-  background: url("./../../img/decor/checkmark.png") center no-repeat;
+  background: url("../img/decor/checkmark.png") center no-repeat;
 }
 .radio__elem {
   display: none;
